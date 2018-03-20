@@ -1,10 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="ISO-8859-1">
+<title>SpotifyWeb</title>
+<style type="text/css">
+
+	body{
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+		background-color: #181818;
+	}
+	
+	#search{
+		display: block;
+		top: 5px;
+		width: 100%;
+		height: 40px;
+		padding-top: 10px;
+		text-align: center;
+		background-color: #1ED760);
+		border-style: solid;
+        border-color:darkgrey;
+	}
+	
+	#txtSearchBox {
+			background-color: white);
+			margin-left: 0px;
+			font-style: Times;
+	}
+    
+    #btnSubmitSearch {
+			margin-left: 30px;
+			background-color: #b3b3b3;
+	}
+    
+    .Button {
+			color: white;
+            margin-left: 5px;
+			background-color: rgba(0,0,0,0);
+			padding: 5px;
+	}
+    
+    #tableSong{
+	position:fixed;
+    top:75px;
+	width: 100%;
+	background-color: rgba(0,0,0,0);
+	color: white;
+	border-style: solid;
+	border-color:darkgrey;
+	}
+
+</style>
 </head>
 <body>
-
+	<form id="search">
+		<input id="txtSearchBox" type="text" name="txtSearchBox" value="">
+		<input id="btnSubmitSearch" type="submit" value="Search">
+		<label class= "Button">
+			<input id="btnArtist" type="radio" name="btnSearch" value="artist" checked="checked"> Artist
+		</label>
+		<label class= "Button">
+			<input id="btnAlbum" type="radio" name="btnSearch" value="album"> Album 
+		</label>				
+		<label class= "Button">
+			<input id="btnSong" type="radio" name="btnSearch" value="song"> Song 
+		</label>
+	</form>
+    <tableSong id="tableSong">
+	<tr>
+		<th>Title</th>
+		<th>Length</th>
+		<th>Record Date</th>
+		<th>Release Date</th>
+	</tr>
+	<tr>
+		<td>...</td>
+		<td>...</td>
+		<td>...</td>
+		<td>...</td>
+	</tr>
+	<tr>
+		<td>...</td>
+		<td>...</td>
+		<td>...</td>
+		<td>...</td>
+	</tr>
+	<tr>
+		<td>...</td>
+		<td>...</td>
+		<td>...</td>
+		<td>...</td>
+	</tr>
+	<tr>
+		<td>...</td>
+		<td>...</td>
+		<td>...</td>
+		<td>...</td>
+	</tr>
+	</tableSong>		
 </body>
 </html>
