@@ -7,6 +7,48 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+  
+ <script>
+ 
+/** var song = {};
+ 
+ var song2 = {
+	"song_id" : 1,
+	"title" : "Stairway to Heaven",
+	"length" : 10
+ };
+ 
+ var song3 = "{
+			'song_id' : 1,
+			'title' : 'Stairway to Heaven',
+			'length' : 10
+}";**/
+
+ var songList = null;
+ 
+ $(document).ready(function(){
+	 $.get("GettSongList", function(){
+		 songList = JSON.parse(data);
+		 for(var i = 0; i < songList.length; i++){
+			 console.log(songList[i].title)
+		 }
+		// console.log(data);
+	 })
+	 
+	 /**sond.id = 1;
+	 song.title = "Stairway to Heaven";
+	 song.length = 10;
+	 console.log(song);
+	 console.log("Song Title: " + song.title);
+	 
+	 console.log(song2);
+	 
+	 var song3 = JSON.stringtify(song2);
+	 console.log(song);
+ });**/
+ 
+ </script>
+ 
 </head>
 <body>
 
