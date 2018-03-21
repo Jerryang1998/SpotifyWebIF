@@ -25,13 +25,20 @@
 }";**/
 
  var songList = null;
+ var artistList = null;
  
  $(document).ready(function(){
-	 $.get("GettSongList", function(){
-		 songList = JSON.parse(data);
-		 for(var i = 0; i < songList.length; i++){
-			 console.log(songList[i].title)
-		 }
+	$.get("GettSongList", function(){
+		songList = JSON.parse(data);
+		for(var i = 0; i < songList.length; i++){
+		console.log(songList[i].title)
+		}
+		 
+	$.get("GettArtistList", function(){
+		artistList = JSON.parse(data);
+		for(var j = 0; j < artistList.length; j++){
+		console.log(artistList[j].title)
+		}
 		// console.log(data);
 	 })
 	 

@@ -33,20 +33,33 @@ public class GetArtistList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+response.setContentType("application/json");
+		
+		String first_name = "";
+		
+		if(request.getParameter("first_name") != null){
+			first_name = request.getParameter("first_name");
+		}
 		try {
 			DbUtilities db = new DbUtilities();
-			String sql = "SELECT * FROM artist ORDER BY title ASC";
+			String sql = "SELECT * FROM artist ";
+			if(! first_name.equals("")){
+				sql += " WHERE title LIKE '%" + first_name + "%' "; 
+			}
+			sql +=" ORDER BY first_name ASC;";
+			
 			ResultSet rs = db.getResultSet(sql);
 			JSONArray artistList = new JSONArray();
-			while(rs.next()) {
-				JSONObject song = new JSONObject();
-				song.put("id", rs.getString("artist_id"));
-				song.put("first_name", rs.getString("first_name"));
-				song.put("last_name", rs.getString("last_name"));
-				song.put("band_name", rs.getString("band_name"));
-				song.put("length", rs.getInt("length"));
-				artistList.put(song);
+			while(rs.next()){
+				JSONObject artist = new JSONObject();
+				artist.put("artist_id", rs.getString("artist_id"));
+				artist.put("first_name", rs.getString("first_name"));
+				artist.put("last_name", rs.getString("last_name"));
+				artist.put("band_name", rs.getString("band_name"));
+				artist.put("bio", rs.getString("bio"));
+				artistList.put(artist);
 			}
+			
 			response.getWriter().write(artistList.toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -55,6 +68,7 @@ public class GetArtistList extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 

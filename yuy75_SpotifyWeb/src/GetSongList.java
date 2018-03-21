@@ -33,20 +33,33 @@ public class GetSongList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json");
+		
+		String title = "";
+		
+		if(request.getParameter("title") != null){
+			title = request.getParameter("title");
+		}
 		try {
 			DbUtilities db = new DbUtilities();
-			String sql = "SELECT * FROM song ORDER BY title ASC";
+			String sql = "SELECT * FROM song ";
+			if(! title.equals("")){
+				sql += " WHERE title LIKE '%" + title + "%' "; 
+			}
+			sql +=" ORDER BY title ASC;";
+			
 			ResultSet rs = db.getResultSet(sql);
 			JSONArray songList = new JSONArray();
-			while(rs.next()) {
+			while(rs.next()){
 				JSONObject song = new JSONObject();
 				song.put("id", rs.getString("song_id"));
 				song.put("title", rs.getString("title"));
-				song.put("record_date", rs.getString("record_date"));
 				song.put("release_date", rs.getString("release_date"));
+				song.put("record_date", rs.getString("record_date"));
 				song.put("length", rs.getInt("length"));
 				songList.put(song);
 			}
+			
 			response.getWriter().write(songList.toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
